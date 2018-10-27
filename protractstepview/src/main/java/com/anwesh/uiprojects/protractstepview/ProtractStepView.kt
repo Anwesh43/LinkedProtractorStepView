@@ -24,17 +24,16 @@ fun Canvas.drawPSNode(i : Int, scale : Float, paint : Paint) {
     paint.strokeWidth = Math.min(w, h) / 60
     paint.strokeCap = Paint.Cap.ROUND
     paint.style = Paint.Style.STROKE
+    paint.color = color
     save()
     translate(gap + i * gap, h / 2)
     for (j in 0..1) {
         val sc : Float = Math.min(0.5f, Math.max(0f, scale - 0.5f * j)) * 2
         val deg : Float = 120f * sc * (1 - 2 * j)
-        paint.color = color
         save()
         rotate(deg)
         drawLine(0f, 0f, size, 0f, paint)
         restore()
-        paint.color = Color.WHITE
         drawArc(RectF(-size, -size, size, size), 0f, deg, false, paint)
     }
     restore()
