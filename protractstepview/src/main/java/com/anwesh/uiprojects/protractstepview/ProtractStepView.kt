@@ -174,4 +174,27 @@ class ProtractStepView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : ProtractStepView) {
+
+        private val ps : ProtractStep = ProtractStep(0)
+
+        private val animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#BDBDBD"))
+            ps.draw(canvas, paint)
+            animator.animate {
+                ps.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            ps.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
