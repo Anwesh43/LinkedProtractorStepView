@@ -4,6 +4,7 @@ package com.anwesh.uiprojects.protractstepview
  * Created by anweshmishra on 27/10/18.
  */
 
+import android.app.Activity
 import android.view.View
 import android.view.MotionEvent
 import android.graphics.Paint
@@ -197,6 +198,15 @@ class ProtractStepView(ctx : Context) : View(ctx) {
             ps.startUpdating {
                 animator.start()
             }
+        }
+    }
+
+    companion object {
+
+        fun create(activity : Activity) : ProtractStepView {
+            val view : ProtractStepView = ProtractStepView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
